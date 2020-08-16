@@ -7,7 +7,7 @@ const app = "tipoftheday";
 
 // add the server path to your server location path
 // TODO Use your local path to eXo Platform server folder
-const exoServerPath = "/eXo/tip-of-the-day/platform-community-5.3.3";
+const exoServerPath = "../../../Downloads/platform-community-5.3.3";
 
 let config = merge(webpackCommonConfig, {
   output: {

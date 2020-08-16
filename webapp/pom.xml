@@ -138,7 +138,7 @@
             </goals>
             <phase>compile</phase>
             <configuration>
-              <arguments>run build</arguments>
+              <arguments>run watch</arguments>
             </configuration>
           </execution>
         </executions>

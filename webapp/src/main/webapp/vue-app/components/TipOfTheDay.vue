@@ -8,7 +8,12 @@
     "{ display }" in this case defined inside data-->
     <!-- <form :style="{ display }"> -->
     <v-form v-show="!addTip" class="form-tip form-tip-view">
-      <i class="btn-tip">?</i>
+      <button 
+        id="ComposerHintCloseBtn"
+        class="btn-tip" 
+        type="button">
+        <i class="uiIconQuestion uiIconLightGray"></i>
+      </button>
       <v-tooltip 
         top>
         <template 
@@ -51,17 +56,20 @@
         readonly="true" />
       <div :class="{btnContainerShow: showTipData}" class="btn-container">
         <button 
+          id="ComposerHintCloseBtn"
           class="btn-tip" 
           type="button" 
-          @click="getTipInfo">></button>
+          @click="getTipInfo"><i class="uiIconNextArrow uiIconLightGray"></i></button>
         <button 
+          id="ComposerHintCloseBtn"
           class="btn-tip" 
           type="button" 
-          @click="showAddTipForm">+</button>
+          @click="showAddTipForm"><i class="uiIconSimplePlusMini uiIconLightGray"></i></button>
         <button 
+          id="ComposerHintCloseBtn"
           class="btn-tip" 
           type="button" 
-          @click="closeTipForm">x</button>
+          @click="closeTipForm"><i class="uiIconClose uiIconLightGray"></i></button>
       </div>
     </v-form>
     <v-form
@@ -70,7 +78,12 @@
       enctype="multipart/form-data"
       method="post"
       name="text">
-      <i class="btn-tip">?</i>
+      <button 
+        id="ComposerHintCloseBtn"
+        class="btn-tip" 
+        type="button">
+        <i class="uiIconQuestion uiIconLightGray"></i>
+      </button>
       <v-textarea
         v-model="tipInfo.text" 
         background-color="#f3f3f3"
@@ -82,14 +95,18 @@
         hide-details="true"
         outlined
         class="custom-text-field"/>
+      <div class="share-buttons-down button-group clearfix btn-tip">
+        <button 
+          id="ShareButton"
+          class="share-button btn btn-primary" 
+          type="button" 
+          @click="saveAndCloseAddTipForm">Save</button>
+      </div>
       <button 
+        id="ComposerHintCloseBtn"
         class="btn-tip" 
         type="button" 
-        @click="saveAndCloseAddTipForm">Save</button>
-      <button 
-        class="btn-tip" 
-        type="button" 
-        @click="closeAddTipForm">x</button>
+        @click="closeAddTipForm"><i class="uiIconClose uiIconLightGray"></i></button>
     </v-form>
   </v-app>
 </template>
@@ -233,6 +250,9 @@ export default {
   overflow-wrap: anywhere;
   max-width: calc(100% - 12px);
 }
+.custom-text-field.v-textarea {
+  margin: 0 4px;
+}
 .custom-text-field.v-text-field__slot {
   margin-right: 0;
   border-radius: inherit;
@@ -297,13 +317,43 @@ export default {
   text-align: center;
   cursor: pointer;
 }
+.form-tip-view > .btn-tip:first-of-type {
+  margin: 2px;
+}
+.form-tip-post > div.btn-tip {
+  border: none !important;
+  padding: 0;
+}
+.btn-tip:hover [class^="uiIcon"]{
+  color: #2f5e92;
+}
+.form-tip-post > .btn-tip > .btn-primary {
+  color: white;
+  font-weight: bold;
+}
+.btn-primary:hover {
+  background-color: #2f5e92 !important;
+}
+[class^="uiIcon"] {
+  opacity: 0.5;
+  color: #626262;
+}
+[class^="uiIcon"]:hover {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    color: #999999 !important;
+}
+/* [class^="uiIcon"]:hover {
+  color: #2f5e92;
+} */
 @media only screen and (max-width: 530px) {
   .form-tip {
     display: grid;
   }
-  .form-tip > i {
+  .form-tip-view > .btn-tip:first-of-type {
     grid-row-start: 5;
     justify-self: end;
+    margin-top: 0px;
   }
   .form-tip-view > .v-input:first-of-type  {
     grid-column: 1 / span 2;
@@ -323,19 +373,25 @@ export default {
     grid-row-start: 5;
     margin: 0;
   }
-  .form-tip-post > i{
+  .form-tip-post > .btn-tip{
     grid-row: 2 / span 1;
   }
   .form-tip-post >>> .custom-text-field.v-textarea {
     margin-bottom: 10px;
     grid-column: 1 / span 3;
   }
-  .form-tip-post > button:first-of-type {
+  .form-tip-post > div.btn-tip:nth-of-type(2){
     grid-row: 2 / span 1;
     max-width: 100%;
   }
-  .form-tip-post > button:nth-of-type(2) {
+  .form-tip-post > .btn-tip:nth-of-type(2) > .btn-primary {
+    width: 100%;
+  }
+  .form-tip-post > .btn:nth-of-type(3) {
     grid-row: 2 / span 1;
+  }
+  .form-tip-post > .btn-tip:first-of-type {
+    justify-self: end;
   }
 }
 </style>
